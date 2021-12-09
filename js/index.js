@@ -89,31 +89,31 @@ function renderGlutenFreeCrust() {
 function renderButtons() {
   // Iteration 3: add/remove the class "active" of each `<button class="btn">`
   let pepBtn = document.querySelector('.btn.btn-pepperoni');
-  if (state.pepperoni === true) {
+  if (state.pepperoni) {
     pepBtn.classList.add("active");
-  } else if {
+  } else {
    pepBtn.classList.remove("active");
   }
   let mushBtn = document.querySelector('.btn.btn-mushrooms');
-  if (state.mushrooms === true) {
+  if (state.mushrooms) {
     mushBtn.classList.add("active");
-  } else if {
+  } else {
     mushBtn.classList.remove("active");
   }
   let gpBtn = document.querySelector('.btn.btn-green-peppers');
-  if (state.green-peppers === true) {
+  if (state.greenPeppers) {
     gpBtn.classList.add("active");
   } else {
     gpBtn.classList.remove("active");
 }
 let sauceBtn = document.querySelector('.btn.btn-sauce');
-  if (state.sauce === true) {
+  if (state.whiteSauce) {
     sauceBtn.classList.add("active");
   } else {
     sauceBtn.classList.remove("active");
   }
   let crustBtn = document.querySelector('.btn.btn-crust');
-  if (state.crust === true) {
+  if (state.glutenFreeCrust) {
     crustBtn.classList.add("active");
   } else {
     crustBtn.classList.remove("active");
@@ -123,6 +123,20 @@ let sauceBtn = document.querySelector('.btn.btn-sauce');
 
 function renderPrice() {
   // Iteration 4: change the HTML of `<aside class="panel price">`
+ let totalPrice = basePrice
+ let valueList = document.querySelector("aside.panel.price ul");
+ valueList.innerHTML = ""
+ let printTotal = document.querySelector("strong")
+
+for (let ingredientKey in ingredients) {
+ if (state[ingredientKey]) {
+  totalPrice += ingredients[ingredientKey].price
+  let newList = document.createElement("li")
+  newList.textContent += ingredients[ingredientKey].price + " " + ingredients[ingredientKey].name.toLowerCase()
+  valueList.appendChild(newList)
+   }
+   printTotal.innerHTML = '$' + totalPrice;
+ }
 }
 
 renderEverything();
